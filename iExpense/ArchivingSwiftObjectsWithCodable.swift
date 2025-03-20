@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct User3 {
+struct User3: Codable {
     var name: String
     var lastName: String
 }
@@ -20,7 +20,7 @@ struct ArchivingSwiftObjectsWithCodable: View {
         Button("Save user") {
             let encoder = JSONEncoder()
             
-            if let data = try? encoder.encode(user3) {
+            if let data = try? encoder.encode(user3){
                 UserDefaults.standard.set(data, forKey: "UserData")
             }
         }
