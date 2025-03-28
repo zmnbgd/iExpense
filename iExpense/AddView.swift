@@ -27,7 +27,8 @@ struct AddView: View {
                         Text($0)
                     }
                 }
-                TextField("Amount", value: $amount, format: .currency(code: "USD"))
+                //MARK: - Challenge - 1. Use the user’s preferred currency, rather than always using US dollars.
+                TextField("Amount", value: $amount, format: .currency(code: "RSD"))
                     .keyboardType(.decimalPad)
             }
             .navigationTitle("Add new expense")
