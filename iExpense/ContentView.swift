@@ -7,6 +7,33 @@
 
 import SwiftUI
 
+//MARK: - Challenge: 2. Modify the expense amounts in ContentView to contain some styling depending on their value – expenses under $10 should have one style, expenses under $100 another, and expenses over $100 a third style. What those styles are depend on you.
+
+//MARK: Custom Text Modifier
+struct FontColorModifier: ViewModifier {
+    var amount: Double
+    func body(content: Content) -> some View {
+        content.foregroundColor(colorOption(amount))
+    }
+}
+
+func colorOption(_ amount: Double) -> Color {
+    if amount < 10.0 {
+        return .green
+    } else if amount < 100.0 {
+        return .blue
+    } else {
+        return .red
+    }
+}
+
+//MARK: Custom Modifier Extension
+extension View {
+    func appFontColor(for amount: Double) -> some View {
+        self.modifier(FontColorModifier(amount: amount))
+    }
+}
+
 struct ExpenseItem: Identifiable, Codable {
     var id = UUID()
     let name: String
@@ -50,6 +77,7 @@ struct ContentView: View {
                         VStack(alignment: .leading) {
                             Text(item.name)
                                 .font(.headline)
+                                .appFontColor(for: item.amount)
                             Text(item.type)
                             
                         }
@@ -64,8 +92,8 @@ struct ContentView: View {
             .navigationTitle("iExpense")
             .toolbar {
                 Button("Add Expense", systemImage: "plus") {
-//                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5.0)
-//                    expenses.items.append(expense)
+                    //                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5.0)
+                    //                    expenses.items.append(expense)
                     showAddExpense = true
                 }
             }
@@ -80,7 +108,6 @@ struct ContentView: View {
     func removeItems(at offsets: IndexSet) {
         expenses.items.remove(atOffsets: offsets)
     }
-    
 }
 
 #Preview {
