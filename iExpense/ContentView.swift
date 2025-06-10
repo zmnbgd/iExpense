@@ -91,16 +91,21 @@ struct ContentView: View {
             }
             .navigationTitle("iExpense")
             .toolbar {
-                Button("Add Expense", systemImage: "plus") {
+                // MARK: - Project 9. Challenge 1. Change project 7 (iExpense) so that it uses NavigationLink for adding new expenses rather than a sheet. (Tip: The dismiss() code works great here, but you might want to add the navigationBarBackButtonHidden() modifier so they have to explicitly choose Cancel.)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: AddView(expenses: expenses).navigationBarBackButtonHidden(true)) {
+                        Label("Add Exspense", systemImage: "plus")
+                    }
+                    //Button("Add Expense", systemImage: "plus") {
                     //                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5.0)
                     //                    expenses.items.append(expense)
-                    showAddExpense = true
+                    //showAddExpense = true
                 }
             }
-            .sheet(isPresented: $showAddExpense) {
-                //MARK: - Show Add View
-                AddView(expenses: expenses)
-            }
+            //            .sheet(isPresented: $showAddExpense) {
+            //                //MARK: - Show Add View
+            //                AddView(expenses: expenses)
+            //            }
         }
     }
     
