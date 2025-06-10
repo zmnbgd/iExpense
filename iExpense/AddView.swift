@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddView: View {
+    
     @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
@@ -30,6 +31,15 @@ struct AddView: View {
                 //MARK: - Challenge - 1. Use the user’s preferred currency, rather than always using US dollars.
                 TextField("Amount", value: $amount, format: .currency(code: "RSD"))
                     .keyboardType(.decimalPad)
+                // MARK: - Project 9. Challenge 1. Change project 7 (iExpense) so that it uses NavigationLink for adding new expenses rather than a sheet. (Tip: The dismiss() code works great here, but you might want to add the navigationBarBackButtonHidden() modifier so they have to explicitly choose Cancel.)
+                    .navigationBarBackButtonHidden(true)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel") {
+                                dismiss()
+                            }
+                        }
+                    }
             }
             .navigationTitle("Add new expense")
             .toolbar {
